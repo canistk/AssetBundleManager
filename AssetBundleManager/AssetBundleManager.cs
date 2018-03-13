@@ -142,10 +142,12 @@ namespace AssetBundles
 			}
 
 			downloadsInProgress.Add(MANIFEST_DOWNLOAD_IN_PROGRESS_KEY, new DownloadInProgressContainer(onComplete));
-
 #if !UNITY_EDITOR && !UNITY_WEBGL
 			if (Debug.isDebugBuild)
-				handler = new AssetBundleDownloader(GetStreamingAssetsFolder);
+			{
+				string debugPath = System.IO.Path.Combine(GetStreamingAssetsFolder, Utility.GetPlatformName());
+				handler = new AssetBundleDownloader(debugPath);
+			}
 			else
 				handler = new StreamingAssetsBundleDownloadDecorator(handler, defaultPrioritizationStrategy);
 #else
