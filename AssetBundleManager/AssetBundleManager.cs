@@ -145,6 +145,7 @@ namespace AssetBundles
 #if !UNITY_EDITOR && !UNITY_WEBGL
 			if (Debug.isDebugBuild)
 			{
+				// in develop build, we assume bundle are put into streaming asset sub folder.
 				string debugPath = System.IO.Path.Combine(GetStreamingAssetsFolder, Utility.GetPlatformName());
 				handler = new AssetBundleDownloader(debugPath);
 			}
