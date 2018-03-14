@@ -75,7 +75,12 @@ namespace AssetBundles
 		{
 			get
 			{
+#if UNITY_IOS
+				// Attempt to fix development build on iOS can not resolve path on device.
+				string path = "file://" + System.IO.Path.Combine(Application.streamingAssetsPath, Utility.AssetBundlesOutputPath);
+#else
 				string path = System.IO.Path.Combine(Application.streamingAssetsPath, Utility.AssetBundlesOutputPath);
+#endif
 				return path;
 			}
 		}
